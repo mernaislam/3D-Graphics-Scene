@@ -297,16 +297,16 @@ public:
 		glPopMatrix();
 
 		spin();
-		glTranslatef(0, -0.83, 0);
-
-		glRotatef(90, 6, 0.0f, 0.0);
-
 		
-		drawOutlineCircle(0, 0, 1, 100);
-		drawOutlineCircle(0, 0, 0.8, 100);
 
 	}
 
+	void drawCircularRoad() {
+		glTranslatef(0, -0.83, 0);
+		glRotatef(90, 6, 0.0f, 0.0);
+		drawOutlineCircle(0, 0, 1, 100);
+		drawOutlineCircle(0, 0, 0.8, 100);
+	}
 	void drawCircle(float cx, float cy, float r, int numSegments) {
 		glBegin(GL_TRIANGLE_FAN);
 		for (int i = 0; i < numSegments; ++i) {
@@ -332,7 +332,6 @@ public:
 	
 	void spin() {
 		T = T + 0.08;
-		//std::cout << T << std::endl;
 		if (T > 360) {
 			T = 0;
 		}

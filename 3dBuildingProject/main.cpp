@@ -100,7 +100,7 @@ void display() {
 	drawer.drawGround();
 	drawer.drawBuilding(triangleVertices, cubeVertices, window, doorVertices);
 	drawer.drawBike();
-	
+	drawer.drawCircularRoad();
 
 	glutSwapBuffers();
 }
