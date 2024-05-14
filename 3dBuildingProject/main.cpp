@@ -1,13 +1,14 @@
 #include <GL/glut.h>
 #include<iostream>
 #include "draw.h"
-//GLfloat T = 0;
+GLfloat T = 0;
 GLfloat cx = 0, cy = 0, cz = 3;
 Drawer drawer;
 
 void display();
 void myInit();
 void key(unsigned char ch, int x, int y);
+
 
 int main(int argc, char** argv)
 {
