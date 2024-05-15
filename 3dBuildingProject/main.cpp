@@ -8,6 +8,7 @@ Drawer drawer;
 void display();
 void myInit();
 void key(unsigned char ch, int x, int y);
+void mouse(int button, int state, int x, int y);
 
 
 int main(int argc, char** argv)
@@ -20,6 +21,7 @@ int main(int argc, char** argv)
 	myInit();
 	glutDisplayFunc(display);
 	glutKeyboardFunc(key);
+	glutMouseFunc(mouse);
 	//glutIdleFunc(spin);
 	glutMainLoop();
 	return 0;
@@ -47,10 +49,20 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'c': drawer.setOpenDoor(false); break;
 		case 'O': drawer.setOpenWindow(true); break;
 		case 'C': drawer.setOpenWindow(false); break;
+		case 'f': drawer.setMoveX(true, 0.5); break;
+		case 'b': drawer.setMoveX(false, -0.5); break;
 	}
 	glutPostRedisplay();
 }
 
+void mouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		
+	}
+	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
+		
+	}
+}
 
 void display() {
 	

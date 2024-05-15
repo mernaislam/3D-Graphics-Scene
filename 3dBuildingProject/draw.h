@@ -6,6 +6,7 @@ class Drawer {
 public:
 	bool openingDoor = false;
 	bool openingWindow = false;
+	bool forward;
 	GLfloat T = 0;
 public:
 	void setOpenDoor(bool val) {
@@ -14,6 +15,10 @@ public:
 
 	void setOpenWindow(bool val) {
 		openingWindow = val;
+	}
+
+	void setMoveX(bool f, int temp) {
+		forward = f;
 	}
 
 	void Light(GLfloat col[], GLfloat pos[]) {
@@ -116,7 +121,7 @@ public:
 			glScalef(0.75, 0.75, 1);
 			drawCube(cubeVertices);
 		glPopMatrix();
-
+		
 		// upper right cube
 		glPushMatrix();
 			glTranslatef(0.12, -0.25, 0);
@@ -243,18 +248,34 @@ public:
 			glRotatef(120.0f, 0, 1, 0);
 		}
 	}
+	void moveBikeFoward() {
+		if (forward) {
+			glTranslatef(0.5, 0, 0);
+		}
+	}
+	void moveBikeBackward() {
+		if (!forward) {
+			glTranslatef(-0.5, 0, 0);
+
+		}
+	}
+
 
 	void drawBike() {
 		// 3aglteen el odam
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.7, 0.8);
+			moveBikeFoward();
+			moveBikeBackward();
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 		
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.7, 0.79);
+			moveBikeFoward();
+			moveBikeBackward();
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 		
@@ -263,6 +284,8 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.6, 0.8);
+			moveBikeFoward();
+			moveBikeBackward();
 			glScalef(0.5, 3, 0.2);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -271,6 +294,8 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.45, 0.8);
+			moveBikeFoward();
+			moveBikeBackward();
 			glScalef(0.5, 0.5, 3);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -279,6 +304,8 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.25, -0.7, 0.8);
+			moveBikeFoward();
+			moveBikeBackward();
 			glScalef(4, 0.5, 0.5);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -287,16 +314,20 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.8);
+			moveBikeFoward();
+			moveBikeBackward();
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.79);
+			moveBikeFoward();
+			moveBikeBackward();
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 
-		spin();
+		//spin();
 		
 
 	}
