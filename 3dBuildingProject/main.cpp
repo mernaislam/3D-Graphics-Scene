@@ -49,8 +49,8 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'c': drawer.setOpenDoor(false); break;
 		case 'O': drawer.setOpenWindow(true); break;
 		case 'C': drawer.setOpenWindow(false); break;
-		case 'f': drawer.setMoveX(true, 0.5); break;
-		case 'b': drawer.setMoveX(false, -0.5); break;
+		case 'f': drawer.setMoveX(true); break;
+		case 'b': drawer.setMoveX(false); break;
 		case 'r': break;
 	}
 	glutPostRedisplay();
@@ -58,6 +58,7 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 
 void mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		drawer.drawCircularRoad();
 		drawer.animate = true;
 	}
 	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
@@ -117,10 +118,11 @@ void display() {
 		glTranslated(0, -0.05, 0);
 		drawer.moveBikeFoward();
 		drawer.moveBikeBackward();
+		glTranslatef(drawer.bikePosition, 0, 0);
 		drawer.drawBike();
 	glPopMatrix();
-
-	drawer.drawCircularRoad();
+	if(drawer.animate)
+		drawer.drawCircularRoad();
 
 	glutSwapBuffers();
 }

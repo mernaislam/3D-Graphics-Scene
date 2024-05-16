@@ -9,9 +9,8 @@ public:
 	bool animate = false;
 	int forward = -1;
 	int prevMove = -1;
-	GLfloat space = 0;
-	GLfloat fSpace = 0.3;
-	GLfloat bSpace = -0.3;
+	GLfloat bikePosition = 0;
+	
 
 	//GLfloat leftWheelRotate = ;
 
@@ -25,7 +24,7 @@ public:
 		openingWindow = val;
 	}
 
-	void setMoveX(bool f, int temp) {
+	void setMoveX(bool f) {
 		forward = f;
 	}
 
@@ -259,24 +258,17 @@ public:
 	
 	void moveBikeFoward() {
 		if (forward == 1) {
-			space += 0.2;
-			glTranslatef(space, 0, 0);
-			 fSpace += 0.2;
+			bikePosition += 0.2;
 			 forward = -1;
-			 bSpace = -0.3;
-
 		}
 	}
 	
 	void moveBikeBackward() {
-		std::cout << forward << std::endl;
+		
 		if (forward == 0) {
-			space -= 0.2;
-			glTranslatef(space, 0, 0);
-			bSpace -= 0.2;
+			bikePosition -= 0.2;
 			forward = -1;
-			fSpace = 0;
-
+		
 		}
 	}
 
@@ -286,7 +278,6 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.7, 0.8);
-			
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 		
@@ -335,14 +326,18 @@ public:
 		glPopMatrix();
 
 		if(animate)
-			spin();
+			move();
 	}
 
 	void drawCircularRoad() {
-		glTranslatef(0, -0.83, 0);
+		std::cout << "new Road";
+		glTranslatef(0, -0.79999999, 0);
 		glRotatef(90, 6, 0.0f, 0.0);
-		drawOutlineCircle(0, 0, 1, 100);
-		drawOutlineCircle(0, 0, 0.8, 100);
+		float radius1 = abs(bikePosition) + 1;
+		float radius2 = abs(bikePosition) + 0.8;
+		std::cout << radius1 << ' ' << radius2 << std::endl;
+		drawOutlineCircle(0, 0, radius1, 100);
+		drawOutlineCircle(0, 0, radius2, 100);
 	}
 	
 	void drawCircle(float cx, float cy, float r, int numSegments) {
@@ -367,13 +362,16 @@ public:
 		glEnd();
 	}
 	
-	void spin() {
-		T = T + 0.08;
+	void move() {
+		
+		T = T + 0.1;
 		if (T > 360) {
 			T = 0;
 		}
 		glutPostRedisplay();
+		
 	}
+
 	
 	
 };
