@@ -7,13 +7,16 @@ public:
 	bool openingDoor = false;
 	bool openingWindow = false;
 	bool animate = false;
+	bool rotateWheelLeft = false;
+	bool rotateWheelRight = false;
 	int forward = -1;
 	int prevMove = -1;
 	GLfloat space = 0;
 	GLfloat fSpace = 0.3;
 	GLfloat bSpace = -0.3;
 
-	//GLfloat leftWheelRotate = ;
+	GLfloat leftWheelZ = 0.0f;
+	GLfloat rightWheelZ = 0.0f;
 
 	GLfloat T = 0;
 public:
@@ -281,31 +284,23 @@ public:
 	}
 
 	void drawBike() {
-		// 3aglteen el odam
-		//int temp = forward;
+		// right wheel
 		glPushMatrix();
-			glRotatef(T, 0, 0.5f, 0);
+			glRotatef(T, 0, 0.5f, 0.0f);
 			glTranslatef(0.5, -0.7, 0.8);
-			
-			drawCircle(0.0f, 0.0f, 0.1f, 100);
+			glutWireTorus(0.02, 0.08, 200, 200);
+			drawSpokes();
 		glPopMatrix();
 		
+		// line below dreksyon
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
-			glTranslatef(0.5, -0.7, 0.79);
-			drawCircle(0.0f, 0.0f, 0.1f, 100);
-		glPopMatrix();
-		
-
-		// 3amood el dreksyon
-		glPushMatrix();
-			glRotatef(T, 0, 0.5f, 0);
-			glTranslatef(0.5, -0.6, 0.8);
-			glScalef(0.5, 3, 0.2);
+			glTranslatef(0.5, -0.55, 0.8);
+			glScalef(0.5, 1.8, 0.2);
 			glutSolidCube(0.1);
 		glPopMatrix();
 
-		// el dreksyon nafso
+		// dreksyon 
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.45, 0.8);
@@ -313,29 +308,42 @@ public:
 			glutSolidCube(0.1);
 		glPopMatrix();
 
-		// el satr elly fel nos
+		// x line
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.25, -0.7, 0.8);
-			glScalef(4, 0.5, 0.5);
+			glScalef(3.5, 0.5, 0.5);
 			glutSolidCube(0.1);
 		glPopMatrix();
 
-		// 3aglteen elly wara
+		// left wheel
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.8);
-			drawCircle(0.0f, 0.0f, 0.1f, 100);
-		glPopMatrix();
-
-		glPushMatrix();
-			glRotatef(T, 0, 0.5f, 0);
-			glTranslatef(0, -0.7, 0.79);
-			drawCircle(0.0f, 0.0f, 0.1f, 100);
+			glutWireTorus(0.02, 0.08, 200, 200);
+			drawSpokes();
 		glPopMatrix();
 
 		if(animate)
 			spin();
+	}
+
+	void drawSpokes() {
+		glBegin(GL_LINES);
+			glColor3f(1, 1, 1);
+			glVertex2f(-0.06, 0.0);
+			glVertex2f(0.06, 0.0);
+			glColor3f(1, 1, 0);
+			glVertex2f(0.0, -0.06);
+			glVertex2f(0.0, 0.06);
+			glColor3f(0, 1, 0);
+			glVertex2f(0.06, 0.06);
+			glVertex2f(-0.06, -0.06);
+			glColor3f(0, 1, 1);
+			glVertex2f(-0.06, 0.06);
+			glVertex2f(0.06, -0.06);
+		glEnd();
+		glColor3f(0, 0, 0);
 	}
 
 	void drawCircularRoad() {
