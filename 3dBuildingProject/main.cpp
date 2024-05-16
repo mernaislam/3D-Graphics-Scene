@@ -2,7 +2,7 @@
 #include<iostream>
 #include "draw.h"
 GLfloat T = 0;
-GLfloat cx = 0, cy = 0, cz = 3;
+GLfloat cx = 0.25, cy = 1.25, cz = 4.5;
 Drawer drawer =  Drawer();
 
 void display();
@@ -49,8 +49,8 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'c': drawer.setOpenDoor(false); break;
 		case 'O': drawer.setOpenWindow(true); break;
 		case 'C': drawer.setOpenWindow(false); break;
-		case 'f': drawer.setMoveX(true); break;
-		case 'b': drawer.setMoveX(false); break;
+		case 'f': if(!drawer.animate)  drawer.setMoveX(true); break;
+		case 'b':if (!drawer.animate)  drawer.setMoveX(false); break;
 		case 'r': drawer.rotateWheelRight = true; break;
 		case 'l': drawer.rotateWheelLeft = true; break;
 	}
@@ -63,6 +63,7 @@ void mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		drawer.drawCircularRoad();
 		drawer.animate = true;
+		drawer.bikePosition = 0;
 	}
 	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
 		drawer.animate = false;

@@ -379,14 +379,12 @@ public:
 	}
 
 	void drawCircularRoad() {
-		std::cout << "new Road";
 		glTranslatef(0, -0.79999999, 0);
 		glRotatef(90, 6, 0.0f, 0.0);
-		float radius1 = abs(bikePosition) + 1;
-		float radius2 = abs(bikePosition) + 0.8;
-		std::cout << radius1 << ' ' << radius2 << std::endl;
-		drawOutlineCircle(0, 0, radius1, 100);
-		drawOutlineCircle(0, 0, radius2, 100);
+	
+	
+		drawOutlineCircle(0, 0, 1, 100);
+		drawOutlineCircle(0, 0, 0.75, 100);
 	}
 	
 	void drawCircle(float cx, float cy, float r, int numSegments) {
@@ -412,7 +410,6 @@ public:
 	}
 	
 	void move() {
-		
 		T = T + 0.1;
 		if (T > 360) {
 			T = 0;
