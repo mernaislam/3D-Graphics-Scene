@@ -3,7 +3,7 @@
 #include "draw.h"
 GLfloat T = 0;
 GLfloat cx = 0, cy = 0, cz = 3;
-Drawer drawer;
+Drawer drawer =  Drawer();
 
 void display();
 void myInit();
@@ -111,7 +111,13 @@ void display() {
 	
 	drawer.drawGround();
 	drawer.drawBuilding(triangleVertices, cubeVertices, window, doorVertices);
-	drawer.drawBike();
+	glPushMatrix();
+		glTranslated(0, -0.05, 0);
+		drawer.moveBikeFoward();
+		drawer.moveBikeBackward();
+		drawer.drawBike();
+	glPopMatrix();
+
 	drawer.drawCircularRoad();
 
 	glutSwapBuffers();
