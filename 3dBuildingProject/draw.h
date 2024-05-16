@@ -6,11 +6,14 @@ class Drawer {
 public:
 	bool openingDoor = false;
 	bool openingWindow = false;
+	bool animate = false;
 	int forward = -1;
 	int prevMove = -1;
 	GLfloat space = 0;
 	GLfloat fSpace = 0.3;
 	GLfloat bSpace = -0.3;
+
+	//GLfloat leftWheelRotate = ;
 
 	GLfloat T = 0;
 public:
@@ -253,6 +256,7 @@ public:
 			glRotatef(120.0f, 0, 1, 0);
 		}
 	}
+	
 	void moveBikeFoward() {
 		if (forward == 1) {
 			space += 0.2;
@@ -263,6 +267,7 @@ public:
 
 		}
 	}
+	
 	void moveBikeBackward() {
 		std::cout << forward << std::endl;
 		if (forward == 0) {
@@ -274,7 +279,6 @@ public:
 
 		}
 	}
-
 
 	void drawBike() {
 		// 3aglteen el odam
@@ -289,8 +293,6 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.7, 0.79);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 		
@@ -299,8 +301,6 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.6, 0.8);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			glScalef(0.5, 3, 0.2);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -309,8 +309,6 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.5, -0.45, 0.8);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			glScalef(0.5, 0.5, 3);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -319,8 +317,6 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0.25, -0.7, 0.8);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			glScalef(4, 0.5, 0.5);
 			glutSolidCube(0.1);
 		glPopMatrix();
@@ -329,22 +325,17 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.8);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.79);
-			/*moveBikeFoward();
-			moveBikeBackward();*/
 			drawCircle(0.0f, 0.0f, 0.1f, 100);
 		glPopMatrix();
 
-		//spin();
-		
-
+		if(animate)
+			spin();
 	}
 
 	void drawCircularRoad() {
@@ -353,6 +344,7 @@ public:
 		drawOutlineCircle(0, 0, 1, 100);
 		drawOutlineCircle(0, 0, 0.8, 100);
 	}
+	
 	void drawCircle(float cx, float cy, float r, int numSegments) {
 		glBegin(GL_TRIANGLE_FAN);
 		for (int i = 0; i < numSegments; ++i) {
@@ -363,7 +355,6 @@ public:
 		}
 		glEnd();
 	}
-
 
 	void drawOutlineCircle(float cx, float cy, float r, int numSegments) {
 		glBegin(GL_LINE_LOOP);
