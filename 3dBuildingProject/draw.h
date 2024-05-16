@@ -287,7 +287,7 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0.0f);
 			glTranslatef(0.5, -0.7, 0.8);
-			if (rotateWheelRight) {
+			if (rotateWheelRight || animate) {
 				rightWheelZ -= 10.0f;
 				glRotatef(rightWheelZ, 0, 0, 1);
 				glTranslatef(-0.5, 0.7, -0.8);
@@ -326,6 +326,12 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.8);
+			if (animate) {
+				rightWheelZ -= 10.0f;
+				glRotatef(rightWheelZ, 0, 0, 1);
+				glTranslatef(-0.5, 0.7, -0.8);
+				glTranslatef(0.5, -0.7, 0.8);
+			}
 			if (rotateWheelLeft) {
 				leftWheelZ += 10.0f;
 				glRotatef(leftWheelZ, 0, 0, 1);
