@@ -49,8 +49,8 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'c': drawer.setOpenDoor(false); break;
 		case 'O': drawer.setOpenWindow(true); break;
 		case 'C': drawer.setOpenWindow(false); break;
-		case 'f': drawer.setMoveX(true, 0.5); break;
-		case 'b': drawer.setMoveX(false, -0.5); break;
+		case 'f': drawer.setMoveX(true); break;
+		case 'b': drawer.setMoveX(false); break;
 		case 'r': drawer.rotateWheelRight = true; break;
 		case 'l': drawer.rotateWheelLeft = true; break;
 	}
@@ -94,18 +94,28 @@ void display() {
 	   {0.25, -0.25, -0.25}
 	};
 
-	GLfloat doorVertices[4][3] = {
-		{0.05, -0.25, 0.26},
-		{-0.05, -0.25, 0.26},
-		{-0.05, -0.05, 0.26},
-		{0.05, -0.05, 0.26}
+	GLfloat doorVertices[8][3] = {
+		{0.05, -0.25, 0.2501},
+		{-0.05, -0.25, 0.2501},
+		{-0.05, -0.05, 0.2501},
+		{0.05, -0.05, 0.2501},
+
+		{ 0.05, -0.25, 0.24},
+		{-0.05, -0.25, 0.24},
+		{-0.05, -0.05, 0.24},
+		{0.05, -0.05, 0.24}
 	};
 
-	GLfloat window[4][3] = {
-		{0.1, 0.1, 0.26},
-	   {-0.02, 0.1, 0.26},
-	   {-0.02, -0.05, 0.26},
-	   {0.1, -0.05, 0.26},
+	GLfloat window[8][3] = {
+		{0.1, 0.1, 0.2501},
+	   {-0.02, 0.1, 0.2501},
+	   {-0.02, -0.05, 0.2501},
+	   {0.1, -0.05, 0.2501},
+
+	   {0.1, 0.1, 0.24},
+	   {-0.02, 0.1, 0.24},
+	   {-0.02, -0.05, 0.24},
+	   {0.1, -0.05, 0.24},
 	};
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

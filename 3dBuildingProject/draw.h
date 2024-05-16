@@ -55,35 +55,55 @@ public:
 		glEnd();
 	}
 
-	void drawRect(GLfloat v[4][3], GLfloat r, GLfloat g, GLfloat b) {
-		glColor3f(r, g, b); 
+	void drawBehind(GLfloat v[8][3], GLfloat r, GLfloat g, GLfloat b) {
+		glColor3f(r, g, b);
 		face4(v[0], v[1], v[2], v[3]);
 	}
 
-	void drawCube(GLfloat vertices[8][3]) {
+	void drawRect(GLfloat v[8][3], GLfloat r, GLfloat g, GLfloat b) {
 		// front
-		glColor3f(0.976, 0.988, 0.671); 
-		face4(vertices[0], vertices[1], vertices[2], vertices[3]);
+		glColor3f(r, g, b); 
+		face4(v[0], v[1], v[2], v[3]);
 
 		// back
-		glColor3f(0.976, 0.988, 0.671); 
-		face4(vertices[4], vertices[5], vertices[6], vertices[7]);
+		glColor3f(1, 1, 1);
+		face4(v[4], v[5], v[6], v[7]);
 
+		glColor3f(0.8, 0.8, 0.8);
 		// top
-		glColor3f(1, 1, 1); 
-		face4(vertices[0], vertices[4], vertices[5], vertices[1]);
+		face4(v[0], v[4], v[5], v[1]);
 
 		// left
-		glColor3f(0.831, 0.808, 0.49); 
-		face4(vertices[5], vertices[1], vertices[2], vertices[6]);
+		face4(v[5], v[1], v[2], v[6]);
 
 		// bottom
-		glColor3f(1, 1, 1); 
-		face4(vertices[3], vertices[7], vertices[6], vertices[2]);
+		face4(v[3], v[7], v[6], v[2]);
 
 		// right
-		glColor3f(0.831, 0.808, 0.49); 
-		face4(vertices[0], vertices[4], vertices[7], vertices[3]);
+		face4(v[0], v[4], v[7], v[3]);
+	}
+
+	void drawCube(GLfloat v[8][3]) {
+		glColor3f(0.31, 0.251, 0.224);
+		
+		// front
+		face4(v[0], v[1], v[2], v[3]);
+		// back
+		face4(v[4], v[5], v[6], v[7]);
+
+		glColor3f(1, 1, 1); 
+		
+		// top
+		face4(v[0], v[4], v[5], v[1]);
+		// bottom
+		face4(v[3], v[7], v[6], v[2]);
+
+		glColor3f(0.231, 0.184, 0.165);
+		
+		// left
+		face4(v[5], v[1], v[2], v[6]);
+		// right
+		face4(v[0], v[4], v[7], v[3]);
 	}
 
 	void drawTriangle(GLfloat vertices[6][3]) {
@@ -109,93 +129,100 @@ public:
 	}
 
 	void drawBuilding(GLfloat triangleVertices[6][3], GLfloat cubeVertices[8][3],
-		GLfloat window[4][3], GLfloat doorVertices[4][3]) {
+		GLfloat window[8][3], GLfloat doorVertices[8][3]) {
 
 		// draw building roof
 		glPushMatrix();
-			glTranslatef(0, 0.19, 0);
+			glTranslatef(0, 0.721, 0);
 			glScalef(1.5, 1, 1);
 			drawTriangle(triangleVertices);
 		glPopMatrix();
 
 		// lower right cube
 		glPushMatrix();
-			glTranslatef(0.12, -0.62, 0);
-			glScalef(0.75, 0.75, 1);
+			glTranslatef(0.12, -0.43, 0);
+			glScalef(0.75, 1.5, 1);
 			drawCube(cubeVertices);
 		glPopMatrix();
 
 		// lower left cube
 		glPushMatrix();
-			glTranslatef(-0.12, -0.62, 0);
-			glScalef(0.75, 0.75, 1);
+			glTranslatef(-0.12, -0.43, 0);
+			glScalef(0.75, 1.5, 1);
 			drawCube(cubeVertices);
+		glPopMatrix();
+
+		// divider
+		glPushMatrix();
+			glTranslatef(0, -0.045, 0);
+			glScalef(1.24, 0.05, 1.1);
+			drawRect(cubeVertices, 0.8, 0.8, 0.8);
 		glPopMatrix();
 		
 		// upper right cube
 		glPushMatrix();
-			glTranslatef(0.12, -0.25, 0);
-			glScalef(0.75, 0.75, 1);
+			glTranslatef(0.12, 0.22, 0);
+			glScalef(0.75, 1, 1);
 			drawCube(cubeVertices);
 		glPopMatrix();
 
 		// upper left cube
 		glPushMatrix();
-			glTranslatef(-0.12, -0.25, 0);
-			glScalef(0.75, 0.75, 1);
+			glTranslatef(-0.12, 0.22, 0);
+			glScalef(0.75, 1, 1);
 			drawCube(cubeVertices);
 		glPopMatrix();
 
-		// draw left uppper window
+		// draw left upper window
 		glPushMatrix();
-			glTranslatef(-0.26, -0.2, 0);
+			glTranslatef(-0.26, 0.2, 0);
 			openWindow();
 			drawRect(window, 0.757, 0.898, 0.961);
 		glPopMatrix();
 
 		// draw behind left upper window
 		glPushMatrix();
-			glTranslatef(-0.26, -0.2, 0);
-			drawRect(window, 0, 0, 0);
+			glTranslatef(-0.26, 0.2, 0);
+			drawBehind(window, 0, 0, 0);
 		glPopMatrix();
 
 		// draw left lower window
 		glPushMatrix();
-			glTranslatef(-0.26, -0.42, 0);
+			glTranslatef(-0.26, -0.35, 0);
 			openWindow();
 			drawRect(window, 0.757, 0.898, 0.961);
 		glPopMatrix();
 
 		// draw behind left lower window
 		glPushMatrix();
-			glTranslatef(-0.26, -0.42, 0);
-			drawRect(window, 0, 0, 0);
+			glTranslatef(-0.26, -0.35, 0);
+			drawBehind(window, 0, 0, 0);
+		glPopMatrix();
+
+		// draw right upper window
+		glPushMatrix();
+			glTranslatef(0.18, 0.2, 0);
+			openWindow();
+			drawRect(window, 0.757, 0.898, 0.961);
+		glPopMatrix();
+
+		// draw behind right upper window
+		glPushMatrix();
+			glTranslatef(0.18, 0.2, 0);
+			drawBehind(window, 0, 0, 0);
 		glPopMatrix();
 
 		// draw right lower window
 		glPushMatrix();
-			glTranslatef(0.18, -0.42, 0);
+			glTranslatef(0.18, -0.35, 0);
 			openWindow();
 			drawRect(window, 0.757, 0.898, 0.961);
 		glPopMatrix();
 
-		// draw behind left upper window
+		// draw behind right lower window
 		glPushMatrix();
-			glTranslatef(0.18, -0.42, 0);
-			drawRect(window, 0, 0, 0);
-		glPopMatrix();
-
-		// draw left upper window
-		glPushMatrix();
-			glTranslatef(0.18, -0.2, 0);
-			openWindow();
-			drawRect(window, 0.757, 0.898, 0.961);
-		glPopMatrix();
-
-		// draw behind left upper window
-		glPushMatrix();
-		glTranslatef(0.18, -0.2, 0);
-		drawRect(window, 0, 0, 0);
+		glTranslatef(0.18, -0.35, 0);
+		drawBehind(window, 0, 0, 0);
 		glPopMatrix();
 
 		// draw door
@@ -203,21 +230,14 @@ public:
 			glTranslatef(0, -0.43, 0);
 			glScalef(1.5, 1.5, 1);
 			openDoor();
-			drawRect(doorVertices, 0.4, 0.188, 0);
+			drawRect(doorVertices, 0.722, 0.655, 0.596);
 		glPopMatrix();
-
-		/*GLfloat doorVertices[4][3] = {
-		{0.05, -0.25, 0.26},
-		{-0.05, -0.25, 0.26},
-		{-0.05, -0.05, 0.26},
-		{0.05, -0.05, 0.26}
-		};*/
 
 		// draw behind door
 		glPushMatrix();
 			glTranslatef(0, -0.43, 0);
 			glScalef(1.5, 1.5, 1);
-			drawRect(doorVertices, 0, 0, 0);
+			drawBehind(doorVertices, 0, 0, 0);
 		glPopMatrix();
 
 	}
