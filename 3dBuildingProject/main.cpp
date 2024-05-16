@@ -51,11 +51,13 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'C': drawer.setOpenWindow(false); break;
 		case 'f': drawer.setMoveX(true, 0.5); break;
 		case 'b': drawer.setMoveX(false, -0.5); break;
-		case 'r': drawer.rotateWheelRight = true;
-		case 'l': drawer.rotateWheelLeft = true;
+		case 'r': drawer.rotateWheelRight = true; break;
+		case 'l': drawer.rotateWheelLeft = true; break;
 	}
 	glutPostRedisplay();
 }
+
+
 
 void mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
