@@ -280,6 +280,13 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0.0f);
 			glTranslatef(0.5, -0.7, 0.8);
+			if (rotateWheelRight || animate) {
+				rightWheelZ -= 10.0f;
+				glRotatef(rightWheelZ, 0, 0, 1);
+				glTranslatef(-0.5, 0.7, -0.8);
+				glTranslatef(0.5, -0.7, 0.8);
+				rotateWheelRight = false;
+			}
 			glutWireTorus(0.02, 0.08, 200, 200);
 			drawSpokes();
 		glPopMatrix();
@@ -312,6 +319,19 @@ public:
 		glPushMatrix();
 			glRotatef(T, 0, 0.5f, 0);
 			glTranslatef(0, -0.7, 0.8);
+			if (animate) {
+				rightWheelZ -= 10.0f;
+				glRotatef(rightWheelZ, 0, 0, 1);
+				glTranslatef(-0.5, 0.7, -0.8);
+				glTranslatef(0.5, -0.7, 0.8);
+			}
+			if (rotateWheelLeft) {
+				leftWheelZ += 10.0f;
+				glRotatef(leftWheelZ, 0, 0, 1);
+				glTranslatef(-0.5, 0.7, -0.8);
+				glTranslatef(0.5, -0.7, 0.8);
+				rotateWheelLeft = false;
+			}
 			glutWireTorus(0.02, 0.08, 200, 200);
 			drawSpokes();
 		glPopMatrix();
