@@ -49,8 +49,8 @@ void key(unsigned char ch, int x, int y) { // for camera movements
 		case 'c': drawer.setOpenDoor(false); break;
 		case 'O': drawer.setOpenWindow(true); break;
 		case 'C': drawer.setOpenWindow(false); break;
-		case 'f': drawer.setMoveX(true, 0.5); break;
-		case 'b': drawer.setMoveX(false, -0.5); break;
+		case 'f': drawer.setMoveX(true); break;
+		case 'b': drawer.setMoveX(false); break;
 		case 'r': drawer.rotateWheelRight = true;
 		case 'l': drawer.rotateWheelLeft = true;
 	}
